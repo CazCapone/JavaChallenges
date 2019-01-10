@@ -45,28 +45,19 @@ public class DiceRoller {
         if ((diceCount < 1 || diceCount > 100) && (diceSide < 2 || diceSide > 100)){
             System.out.println("No");
         }else{
-            
+            Random roll = new Random(); 
+            for (int i = 0; i < diceCount; i++){
+                diceTotal += roll.nextInt(diceSide) + 1; 
+            }
         
-            
-        Random roll = new Random(); 
-        for (int i = 0; i < diceCount; i++){
-            
-        }
-        int r = roll.nextInt(diceSide) + 1; 
             
             
         }
         
-   
+
+        System.out.println("total " + diceTotal);
         
-        
-        
-        
-        
-        System.out.println("Sides " + diceSide );
-        System.out.println("Your roll " + r);
-        
-        return r;
+        return diceTotal;
         //return diceTotal;
     }
     
