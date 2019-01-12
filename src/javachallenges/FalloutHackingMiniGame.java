@@ -49,10 +49,16 @@ public class FalloutHackingMiniGame {
                         count++;
                     }else{
                         System.out.print("_");
+                        for(char c : password){
+                            if (c == guess[i]){
+                                count++;
+                            }
+                        }
                     }
                     
                 }
                 System.out.println(" You got " + count + " letters out of " + password.length + " correct! " );
+                count = 0;
             }
             if (guess.equals(password)){
             System.out.println("You guessed the password! It was " + password);
