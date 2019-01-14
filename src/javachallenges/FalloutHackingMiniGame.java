@@ -5,32 +5,56 @@
  */
 package javachallenges;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
  *
  * @author jduclos1
- * Fallout hacking mini game copy
+ * Fallout hacking mini game copy **need to come back to this one**
  */
 public class FalloutHackingMiniGame {
-    static Scanner scan = new Scanner(System.in);
-    private static char[] password;
-    private static char[] guess;
-    private static int chances = 4;
-    private static char[] yourGuess; 
+    Scanner scan = new Scanner(System.in);
+    private  char[] password;
+    private  char[] guess;
+    private  int chances = 4;
+    private  char[] yourGuess; 
+    
+    private Path path;
     
     
-    public static void main(String[] args){
-        int difficulty;    
-        System.out.println("Please select difficulty level (1-5): ");
-        difficulty = scan.nextInt();
-        displayWords(difficulty);
-        
+    
+    public static void main(String[] args) throws IOException, URISyntaxException{
+        FalloutHackingMiniGame game = new FalloutHackingMiniGame();
+        game.gameLoop();
+    }
+    
+    private void gameLoop() throws IOException, URISyntaxException{
+        int difficulty = 0;    
+        while (difficulty == 0){
+          System.out.println("Please select difficulty level (1-5): ");
+          difficulty = scan.nextInt(); 
+          
+          if (difficulty < 1 || difficulty > 5){
+                System.out.println("Please enter a difficulty level from 1-5. ");
+            }else{
+                displayWords(difficulty);
+            }
+        }
         StartGame();
     }
 
-    private static void StartGame() {
+    private void StartGame() {
         int count = 0;
         yourGuess = new char[password.length];
         
@@ -76,16 +100,40 @@ public class FalloutHackingMiniGame {
         
     }
 
-    private static char[] displayWords(int difficulty) {
+    private char[] displayWords(int difficulty) throws IOException, URISyntaxException {
         String str = "taco";
         password = str.toCharArray();
+        int level = difficulty;
         
         
-        
+
+        buildDictionary(level);
         return password;
     }
 
- 
+    private void buildDictionary(int level) throws IOException, URISyntaxException{
+     //   Path path = Paths.get("src\\javachallenges\\falloutDictionary.txt"); 
+        Random rand = new Random();
+        int listSize = rand.nextInt(5);
+        
+        List[] list = new List[listSize]; 
+                Files.readAllLines(Paths.get("src\\javachallenges\\falloutDictionary.txt"));
+        
+        //List<String> list = Files.readAllLines(path);
+        
+        
+        //System.out.println(list.);
+        
+        //System.out.println(pass);
+        
+        //level 1: 3-4 letters
+        //level 2: 5-6 letters
+        //level 3: 7-8 letters
+        //level 4: 9-10 letters
+        //level 5: 11+ letters
+        
+
+    }
   
     
     
